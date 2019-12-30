@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Component\Taxonomy\Generator;
 
-use Behat\Transliterator\Transliterator;
+use Symfony\Component\String\Slugger\AsciiSlugger;
 use Sylius\Component\Taxonomy\Model\TaxonInterface;
 use Webmozart\Assert\Assert;
 
@@ -42,7 +42,8 @@ final class TaxonSlugGenerator implements TaxonSlugGeneratorInterface
 
     private function transliterate(string $string): string
     {
-        // Manually replacing apostrophes since Transliterator started removing them at v1.2.
-        return Transliterator::transliterate(str_replace('\'', '-', $string));
+        $unicodeString = (new AsciiSlugger())->slug($string);
+
+        return strtolower($unicodeString->toString());
     }
 }
