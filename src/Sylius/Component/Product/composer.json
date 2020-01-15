@@ -22,10 +22,10 @@
     "require": {
         "php": "^7.2",
 
+        "behat/transliterator": "^1.1",
         "sylius/attribute": "^1.2",
         "sylius/resource": "^1.2",
         "symfony/polyfill-iconv": "^1.6",
-        "symfony/string": "5.0.2 as 4.3.0",
         "webmozart/assert": "^1.0"
     },
     "require-dev": {
