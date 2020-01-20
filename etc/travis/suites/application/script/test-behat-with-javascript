@@ -8,8 +8,8 @@ prepare_for_behat_with_js() {
     run_command "export DISPLAY=:99"
 
     # Download and configure ChromeDriver
-    if [ ! -f $SYLIUS_CACHE_DIR/chromedriver ] || [ "$($SYLIUS_CACHE_DIR/chromedriver --version | grep -c 79.0)" = "0" ]; then
-        run_command "curl http://chromedriver.storage.googleapis.com/79.0.3945.36/chromedriver_linux64.zip > chromedriver.zip"
+    if [ ! -f $SYLIUS_CACHE_DIR/chromedriver ] || [ "$($SYLIUS_CACHE_DIR/chromedriver --version | grep -c 79.0.3945.130)" = "0" ]; then
+        run_command "curl http://chromedriver.storage.googleapis.com/79.0.3945.130/chromedriver_linux64.zip > chromedriver.zip"
         run_command "unzip chromedriver.zip"
         run_command "chmod +x chromedriver"
         run_command "mv chromedriver $SYLIUS_CACHE_DIR"

@@ -1,7 +1,5 @@
 language: php
 
-dist: trusty
-
 env:
     global:
         - APP_ENV=test_cached
@@ -12,6 +10,7 @@ addons:
     apt:
         sources:
             - mysql-5.7-trusty
+    chrome: stable
 
 matrix:
     include:
@@ -23,7 +22,6 @@ matrix:
             services:
                 - memcached
                 - mysql
-            dist: xenial
         -
             php: 7.3
             env:
