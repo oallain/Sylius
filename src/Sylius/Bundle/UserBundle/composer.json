@@ -32,14 +32,14 @@
         }
     ],
     "require": {
-        "php": "^7.2",
+        "php": "^7.3",
 
         "doctrine/orm": "^2.5",
 		"egulias/email-validator": "~2.0",
         "sylius/mailer-bundle": "^1.2",
         "sylius/resource-bundle": "^1.2",
         "sylius/user": "^1.2",
-        "symfony/framework-bundle": "^4.3",
+        "symfony/framework-bundle": "^4.4",
         "webmozart/assert": "^1.0"
     },
     "require-dev": {
@@ -48,8 +48,8 @@
         "php-http/guzzle6-adapter": "^1.1",
         "phpspec/phpspec": "^5.0",
         "phpunit/phpunit": "^7.0",
-        "symfony/dependency-injection": "^4.3",
-        "symfony/security-bundle": "^4.3",
+        "symfony/dependency-injection": "^4.4",
+        "symfony/security-bundle": "^4.4",
         "symfony/swiftmailer-bundle": "^3.1"
     },
     "conflict": {

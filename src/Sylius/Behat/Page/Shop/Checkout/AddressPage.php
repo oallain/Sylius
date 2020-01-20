@@ -49,16 +49,16 @@ class AddressPage extends SymfonyPage implements AddressPageInterface
         return 'sylius_shop_checkout_address';
     }
 
-    public function chooseDifferentBillingAddress(): void
+    public function chooseDifferentShippingAddress(): void
     {
         $driver = $this->getDriver();
         if ($driver instanceof Selenium2Driver) {
-            $this->getElement('different_billing_address_label')->click();
+            $this->getElement('different_shipping_address_label')->click();
 
             return;
         }
 
-        $billingAddressSwitch = $this->getElement('different_billing_address');
+        $billingAddressSwitch = $this->getElement('different_shipping_address');
         Assert::false(
             $billingAddressSwitch->isChecked(),
             'Previous state of different billing address switch was true expected to be false'
@@ -123,12 +123,12 @@ class AddressPage extends SymfonyPage implements AddressPageInterface
         $this->getElement('customer_email')->setValue($email);
     }
 
-    public function specifyShippingAddressFullName(string $fullName): void
+    public function specifyBillingAddressFullName(string $fullName): void
     {
         $names = explode(' ', $fullName);
 
-        $this->getElement('shipping_first_name')->setValue($names[0]);
-        $this->getElement('shipping_last_name')->setValue($names[1]);
+        $this->getElement('billing_first_name')->setValue($names[0]);
+        $this->getElement('billing_last_name')->setValue($names[1]);
     }
 
     public function canSignIn(): bool
@@ -219,8 +219,6 @@ class AddressPage extends SymfonyPage implements AddressPageInterface
         }
 
         $addressOption->click();
-
-        JQueryHelper::waitForFormToStopLoading($this->getDocument());
     }
 
     public function selectBillingAddressFromAddressBook(AddressInterface $address): void
@@ -238,6 +236,8 @@ class AddressPage extends SymfonyPage implements AddressPageInterface
         }
 
         $addressOption->click();
+
+        JQueryHelper::waitForFormToStopLoading($this->getDocument());
     }
 
     public function getPreFilledShippingAddress(): AddressInterface
@@ -253,30 +253,32 @@ class AddressPage extends SymfonyPage implements AddressPageInterface
     protected function getDefinedElements(): array
     {
         return array_merge(parent::getDefinedElements(), [
-            'billing_address_book' => '[data-test-billing-address] .ui.dropdown',
+            'billing_address_book' => '[data-test-billing-address] [data-test-address-book]',
             'billing_city' => '[data-test-billing-city]',
             'billing_country' => '[data-test-billing-country]',
-            'billing_country_province' => '[name="sylius_checkout_address[billingAddress][provinceCode]"]',
+            'billing_country_province' => '[data-test-billing-address] [data-test-province-code]',
             'billing_first_name' => '[data-test-billing-first-name]',
             'billing_last_name' => '[data-test-billing-last-name]',
             'billing_postcode' => '[data-test-billing-postcode]',
-            'billing_province' => '[name="sylius_checkout_address[billingAddress][provinceName]"]',
+            'billing_province' => '[data-test-billing-address] [data-test-province-name]',
             'billing_street' => '[data-test-billing-street]',
             'checkout_subtotal' => '[data-test-checkout-subtotal]',
             'customer_email' => '[data-test-login-email]',
             'different_billing_address' => '[data-test-different-billing-address]',
             'different_billing_address_label' => '[data-test-different-billing-address-label]',
-            'login_button' => '#sylius-api-login-submit',
-            'login_password' => 'input[type=\'password\']',
+            'different_shipping_address' => '[data-test-different-shipping-address]',
+            'different_shipping_address_label' => '[data-test-different-shipping-address-label]',
+            'login_button' => '[data-test-login-button]',
+            'login_password' => '[data-test-password-input]',
             'next_step' => '[data-test-next-step]',
-            'shipping_address_book' => '[data-test-address-book]',
+            'shipping_address_book' => '[data-test-shipping-address] [data-test-address-book]',
             'shipping_city' => '[data-test-shipping-city]',
             'shipping_country' => '[data-test-shipping-country]',
-            'shipping_country_province' => '[name="sylius_checkout_address[shippingAddress][provinceCode]"]',
+            'shipping_country_province' => '[data-test-shipping-address] [data-test-province-code]',
             'shipping_first_name' => '[data-test-shipping-first-name]',
             'shipping_last_name' => '[data-test-shipping-last-name]',
             'shipping_postcode' => '[data-test-shipping-postcode]',
-            'shipping_province' => '[name="sylius_checkout_address[shippingAddress][provinceName]"]',
+            'shipping_province' => '[data-test-shipping-address] [data-test-province-name]',
             'shipping_street' => '[data-test-shipping-street]',
         ]);
     }
